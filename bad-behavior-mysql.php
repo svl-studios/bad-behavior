@@ -8,6 +8,8 @@
  * @copyright           2024 SVL Studios
  */
 
+defined( 'ABSPATH' ) || exit;
+
 /**
  * Our log table structure.
  *

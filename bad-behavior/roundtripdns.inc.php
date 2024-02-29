@@ -1,4 +1,14 @@
-<?php if (!defined('BB2_CORE')) die("I said no cheating!");
+<?php
+/**
+ * Roundtrip functions.
+ *
+ * @package             BadBehavior
+ * @author              Kevin Provance/SVL Studios
+ * @license             GNU General Public License, version 3
+ * @copyright           2024 SVL Studios
+ */
+
+defined( 'ABSPATH' ) || exit;
 
 # Round trip DNS verification
 
