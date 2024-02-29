@@ -30,7 +30,7 @@ function bb2_approved($settings, $package)
 {
 	// Dirk wanted this
 	if (is_callable('bb2_approved_callback')) {
-		bb2_approved_callback($settings, $package);
+		bb2_approved_callback( $package );
 	}
 
 	// Decide what to log on approved requests.
@@ -47,7 +47,7 @@ function bb2_reverse_proxy($settings, $headers_mixed)
 	if (!array_key_exists($header, $headers_mixed)) {
 		return false;
 	}
-	
+
 	$addrs = @array_reverse(preg_split("/[\s,]+/", $headers_mixed[$header]));
 	# Skip our known reverse proxies and private addresses
 	if (!empty($settings['reverse_proxy_addresses'])) {

@@ -1,7 +1,8 @@
 <?php
 /*
-Bad Behavior - detects and blocks unwanted Web accesses
-Copyright (C) 2005,2006,2007,2008,2009,2010,2011,2012 Michael Hampton
+Bad Behavior - detects and blocks unwanted Web access.
+Copyright (C) 2005 - 2012 Michael Hampton
+Copyright (C) 2024 - Kevin Provance/SVL Studios
 
 Bad Behavior is free software; you can redistribute it and/or modify it under
 the terms of the GNU Lesser General Public License as published by the Free
@@ -14,13 +15,9 @@ PARTICULAR PURPOSE. See the GNU Lesser General Public License for more details.
 
 You should have received a copy of the GNU Lesser General Public License along
 with this program. If not, see <http://www.gnu.org/licenses/>.
-
-Please report any problems to bad . bots AT ioerror DOT us
-https://bad-behavior.ioerror.us/
 */
 
-###############################################################################
-###############################################################################
+defined( 'ABSPATH' ) || exit;
 
 define('BB2_CWD', dirname(__FILE__));
 
