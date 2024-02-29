@@ -2,9 +2,9 @@
 Tags: comment,trackback,referrer,spam,robot,antispam
 Contributors: error
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_xclick&business=error%40ioerror%2eus&item_name=Bad%20Behavior%20%28From%20WordPress%20Page%29&no_shipping=1&cn=Comments%20about%20Bad%20Behavior&tax=0&currency_code=USD&bn=PP%2dDonationsBF&charset=UTF%2d8
-Requires at least: 3.5
-Tested up to: 5.3.0
-Stable tag: 2.2.24
+Requires at least: 5.0
+Tested up to: 6.5
+Stable tag: 3.0.0
 
 Bad Behavior prevents spammers from ever delivering their junk, and in many
 cases, from ever reading your site in the first place.
@@ -89,7 +89,7 @@ block reason to filter results.
 
 = Bad Behavior 2.2 Known Issues =
 
-* Bad Behavior 2.2 requires MySQL 5.0 or later and PHP 5.2 or later.
+* Bad Behavior 2.3 requires MySQL 5.0 or later and PHP 8.0 or later.
 
 * CloudFlare users must enable the Reverse Proxy option in Bad Behavior's
 settings. See the documentation for further details.
@@ -115,3 +115,79 @@ warnings when Spam Karma 2 displays its internally generated CAPTCHA. This
 is a design problem in Spam Karma 2. Contact the author of Spam Karma 2 for
 a fix.
 
+== Changelog ==
+= 3.0.0 =
+* Added: PHP 8.x support
+* Added: PHPDocs
+* Added: WordPress 6.x support
+* Modified: Added WPCS security fixes.
+
+= 2.2.14 =
+* Some deprecated code has been rewritten. Thanks to Doug Joseph for reporting the issue.
+
+= 2.2.23 =
+* All live links to web sites have been converted to HTTPS links, where available.
+
+= 2.2.22 =
+* A leftover bit of the screening code which was removed in Bad Behavior 2.2.21 caused a spurious PHP notice. This bit has also been removed.
+
+= 2.2.21 =
+* Screening code which used cookies and JavaScript, and had poor performance, has been removed. Because Bad Behavior no longer uses cookies, EU-specific cookie handling code is no longer necessary and has been removed.
+* Resolved an incompatibility with the Health Check plugin
+
+= 2.2.20 =
+* A spurious PHP notice was removed.
+* The current use of cookies to screen requests is being deprecated. Any cookies will be removed from users’ browsers, if they exist.
+
+= 2.2.19 =
+* In certain circumstances, a cross-site scripting attack was possible via the Bad Behavior Whitelist options page. This issue has been fixed.
+* Protection from cross-site request forgery (WordPress nonces) has been added to the Bad Behavior Whitelist and Bad Behavior Options pages. This covers cases where Bad Behavior’s built-in CSRF protection is disabled or ineffective.
+
+= 2.2.18 =
+* A new IP address range is in use by the Bing search engine; this range has been added to Bad Behavior.
+
+= 2.2.17 =
+* Bad Behavior is now compatible with PHP 7.
+* Bad Behavior is now compatible with WordPress 4.4.
+* Bad Behavior can now be used on sites which run on a non-standard HTTP port (the standard ports are 80 for HTTP and 443 for HTTPS).
+
+= 2.2.16 =
+* The via HTTP header, when present in all lowercase letters, violates a convention that headers should be in mixed case, and the lowercase-only header is commonly seen from malicious proxy servers. However, the actual HTTP specifications do not disallow it, and a check for this lowercase header does block some legitimate traffic. Therefore this version of Bad Behavior has been changed to check for lowercase via only in strict mode. This resolves an issue where web users at certain large companies are blocked; sites expecting these visitors should not enable strict mode.
+
+= 2.2.15 =
+* An additional exploit scanner has been identified and blocked.
+* A deprecated function has been removed and replaced.
+* Recent versions of the Google Chrome and Firefox browsers do not actually delete session cookies by default when closing the browser. This resulted in a rare case where old session cookies, served when the site’s EU Cookie setting was off, would be returned if the EU Cookie setting was later enabled. When this happened, the visitor would be blocked. This issue is now resolved.
+
+= 2.2.14 =
+* An additional exploit scanner has been identified and blocked.
+* A small change has been made to accommodate a change made by Firefox to its User-Agent format, to ensure that Firefox 25 (which doesn’t yet exist) is not improperly blocked.
+
+= 2.2.13 =
+* Requests from the Baidu search engine now go through screening similar to Google and other major search engines. This will help to prevent illegitimate access from clients which falsely claim to be the Baidu search engine. A logic error which prevented these checks from ever running has been fixed.
+
+= 2.2.12 =
+* Search engine screening by IP address is now more lenient; a failure to match a known IP address range no longer blocks the bot outright. This change is in response to a major search engine which is adding large numbers of IP address ranges faster than they can be tracked and added to Bad Behavior. Requests which don’t match a known IP address range still go through normal screening, while requests which match will be passed immediately.
+* Search engine IP address screening is bypassed when the request originates from an IPv6 address, pending the addition of IPv6 subnet matching code.
+* Requests from the Baidu search engine now go through screening similar to Google and other major search engines. This will help to prevent illegitimate access from clients which falsely claim to be the Baidu search engine.
+* Some URL blacklist strings have been removed due to the possibility of their matching legitimate user input (e.g. in a site search phrase).
+
+= 2.2.11 =
+* Google AdSense has changed their crawler’s User-Agent string to a string that matches a user agent blacklist entry. This would prevent the delivery of targeted ads to a page, and result in generic ads being displayed. The blacklist entry was temporarily removed pending communication with Google.
+* A PHP warning would be generated if any whitelist had blank lines in it. Blank lines are now stripped out of whitelist entries.
+
+= 2.2.10 =
+* Code added in the previous release to support detection of malicious attacks contained an unfortunate typo causing PHP warnings to appear. This has been fixed.
+
+= 2.2.9 =
+* Several patterns associated with malicious activity such as SQL injection and vulnerability scanning have been identified and blocked.
+* A code change regarding display of the whitelist in the administrative page was reverted due to unforeseen issues.
+
+= 2.2.8 =
+* Several robots associated with spam and malicious activity have been identified and blocked.
+* A minor bug causing the whitelist to not appear properly in the administrative page in some circumstances has been fixed.
+
+= 2.2.7 =
+* A site scraper and a spambot have been identified and blocked.
+* The Bad Behavior timer code, which adds an HTML comment to rendered pages, has been fixed. It should be safe to enable this option (to do so, set $wgBadBehaviorTimer = true; in LocalSettings.php). Please report back if you find a skin with which this functionality still fails.
+* The code which adds Bad Behavior statistics to the blog footer is now disabled by default for new installations. This change was made long ago but somehow got reverted. To change this setting, visit Settings » Bad Behavior.
