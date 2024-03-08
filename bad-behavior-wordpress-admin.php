@@ -76,7 +76,7 @@ function bb2_httpbl_lookup( string $ip ): bool|string { // phpcs:ignore Generic.
 				if ( $engines[ $ip[2] ] ) {
 					$d .= $engines[ $ip[2] ];
 				} else {
-					$d .= "Search engine ${ip[2]}<br/>\n";
+					$d .= "Search engine $ip[2]<br/>\n";
 				}
 			}
 			if ( $ip[3] & 1 ) {
@@ -89,10 +89,10 @@ function bb2_httpbl_lookup( string $ip ): bool|string { // phpcs:ignore Generic.
 				$d .= "Comment Spammer<br/>\n";
 			}
 			if ( $ip[3] & 7 ) {
-				$d .= "Threat level ${ip[2]}<br/>\n";
+				$d .= "Threat level $ip[2]<br/>\n";
 			}
 			if ( $ip[3] > 0 ) {
-				$d .= "Age ${ip[1]} days<br/>\n";
+				$d .= "Age $ip[1] days<br/>\n";
 			}
 		}
 	}

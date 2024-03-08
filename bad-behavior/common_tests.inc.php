@@ -49,8 +49,10 @@ function bb2_cookies( array $package ): bool|string {
 	// First-gen Amazon Kindle is broken; Amazon has been notified 9/24/08
 	// NOTE: RFC 2965 is obsoleted by RFC 6265. Current software MUST NOT
 	// use Cookie2 or $Version in Cookie.
-	if ( str_contains( $package['headers_mixed']['Cookie'], '$Version=0' ) && ! array_key_exists( 'Cookie2', $package['headers_mixed'] ) && ! str_contains( $package['headers_mixed']['User-Agent'], 'Kindle/' ) ) {
-		return '6c502ff1';
+	if ( isset( $package['headers_mixed']['Cookie'] ) ) {
+		if ( str_contains( $package['headers_mixed']['Cookie'], '$Version=0' ) && ! array_key_exists( 'Cookie2', $package['headers_mixed'] ) && ! str_contains( $package['headers_mixed']['User-Agent'], 'Kindle/' ) ) {
+			return '6c502ff1';
+		}
 	}
 
 	return false;
